@@ -1,3 +1,7 @@
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+
 const jsAndTsRules = {
   test: /\.(js|jsx|tsx|ts)$/,
   exclude: /node_modules/,
