@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="D:\curso-webpack\src\test\components\home-page\HomePage.test.tsx">
+    <testCase name="renders text passed by props" duration="27"/>
+  </file>
+</testExecutions>
