@@ -1,8 +1,9 @@
-import React, { ReactElement } from "react";
-import ReactDOM from "react-dom";
+import React, { ReactElement } from 'react';
+import ReactDOM from 'react-dom';
+import HomePage from './components/home-page/HomePage';
 
 export const App = (): ReactElement => {
-  return <h1>Tripalosky</h1>;
+  return <HomePage name='test' />;
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));
