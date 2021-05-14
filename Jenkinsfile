@@ -1,22 +1,23 @@
 pipeline {
 	agent any
 
-	tools {
-		nodejs "NodeJS"
+	triggers {
+        pollSCM('@hourly')
 	}
 
+	options {
+			buildDiscarder(logRotator(numToKeepStr: '5'))
+			disableConcurrentBuilds()
+	}
+		
+
 	stages {
-		stage('Preparation') {
-			steps {
-      			echo "Will deploy to ${NAME_APP}"
-				sh 'rm -Rf .git/'
+		stage('Checkout') {
+				steps {
+                echo '------------>Checkout desde Git Microservicio<------------'
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], gitTool: 'Default' , submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GITHUB_NarenParra', url: 'https://github.com/NarenParra/base-react-ts.git']]])
+				}
 			}
-		}
-        stage('Build npmrc') {
-          	steps {
-				sh 'npm run npmrc'	  
-          	}
-       	}
 		stage('Build') {
           	steps {
 			 	sh 'npm install'
@@ -45,7 +46,7 @@ pipeline {
 				sh "ls -la"
 			}
 		}
-		stage('Deploy') {
+		/* stage('Deploy') {
 			steps {
 				pushToCloudFoundry(
 					target: "${PIVOTAL_URI}",
@@ -59,6 +60,13 @@ pipeline {
 					]
 				)
 			}
-		}
+		} */
+		post {
+			failure {
+				mail(to: 'naren21p@GMAIL.com',
+				body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
+				subject: "ERROR CI: ${env.JOB_NAME}")
+			}
+		}	
 	}
 }
