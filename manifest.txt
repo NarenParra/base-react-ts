@@ -10,7 +10,6 @@ applications:
     buildpacks:
       - nodejs_buildpack
     env:
-      BIT_TOKEN: ${BIT_TOKEN}
       SONAR_LOGIN: ${SONAR_LOGIN}
       SONAR_SERVER_URL: ${SONAR_SERVER_URL}
       SONAR_PROJECT_KEY: ${SONAR_PROJECT_KEY}
