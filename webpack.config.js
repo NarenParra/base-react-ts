@@ -24,11 +24,10 @@ const cssRules = {
 
 module.exports = {
   entry: "./src/index.ts",
-  output: {
-   // filename:"",
+  /* output: {
     publicPath: "https://dreamy-darwin-f3d2b8.netlify.app/",
     //change the url to the production url.
-  },
+  }, */
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
     //si existen varios archivos con el mismo nombre
